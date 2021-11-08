@@ -10,6 +10,7 @@ namespace Properties.Domain.Repositories
         Task<Property> GetProperty(PropertyId propertyId);
         Task<Property> GetProperty(PropertyGuid propertyGuid);
         Task Update(Property property);
+        Task Create(Property property);
         Task<IList<Property>> GetPropertiesFilter(PropertyFilter filter);
     }
 }
