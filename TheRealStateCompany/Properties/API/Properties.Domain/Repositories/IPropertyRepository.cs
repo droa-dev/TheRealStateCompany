@@ -1,5 +1,4 @@
-﻿using Properties.Domain.Enums;
-using Properties.Domain.ValueObjects;
+﻿using Properties.Domain.ValueObjects;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,6 +10,6 @@ namespace Properties.Domain.Repositories
         Task<Property> GetProperty(PropertyGuid propertyGuid);
         Task Update(Property property);
         Task Create(Property property);
-        Task<IList<Property>> GetPropertiesFilter(PropertyFilter filter);
+        Task<IList<Property>> GetPropertiesFilter(PropertyFilters filters);
     }
 }
