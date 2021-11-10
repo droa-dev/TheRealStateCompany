@@ -29,7 +29,8 @@ namespace Properties.Application.BussinesCases.CreateProperty
         }
 
         /// <inheritdoc />
-        public async Task Execute(string name, string address, decimal price, decimal tax, string codeInternal, string year, decimal ownerIdentification, string countryStateAbb)
+        public async Task Execute(string name, string address, decimal price, decimal tax, 
+            string codeInternal, string year, decimal ownerIdentification, string countryStateAbb)
         {
             if (string.IsNullOrEmpty(name))
             {

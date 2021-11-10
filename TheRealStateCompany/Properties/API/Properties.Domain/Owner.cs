@@ -5,7 +5,7 @@ namespace Properties.Domain
 {
     public class Owner
     {
-        public Owner(OwnerGuid ownerGuid, Identification identification, Name name, Address address, File photo, DateTime birthday) 
+        public Owner(OwnerGuid ownerGuid, Identification identification, Name name, Address address, File? photo, DateTime? birthday) 
         {
             this.OwnerGuid = ownerGuid;
             this.IdentificationNumber = identification;
@@ -19,7 +19,8 @@ namespace Properties.Domain
         public Identification IdentificationNumber { get; set; }
         public Name Name { get; set; }
         public Address Address { get; set; }
-        public File Photo { get; set; }
-        public DateTime Birthday { get; set; }
+        public File? Photo { get; set; }
+        public DateTime? Birthday { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

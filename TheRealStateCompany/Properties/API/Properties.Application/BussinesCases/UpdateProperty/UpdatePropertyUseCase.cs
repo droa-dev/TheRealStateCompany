@@ -50,7 +50,7 @@ namespace Properties.Application.BussinesCases.UpdateProperty
             PropertyGuid propertyGuid, Name name, Address address, Money price, Money tax,
             string codeInternal, string year, Identification ownerIdentification, Abbreviation countryStateAbb)
         {
-            Property property = await this._propertyRepository
+            IProperty property = await this._propertyRepository
                 .GetProperty(propertyGuid)
                 .ConfigureAwait(false);
 
@@ -68,7 +68,8 @@ namespace Properties.Application.BussinesCases.UpdateProperty
                     if (countryStates is CountryStates registeredState)
                     {
                         Property updatedProperty = this._propertyFactory
-                        .UpdateProperty(registeredProperty.PropertyGuid, name, address, price, codeInternal, year, registeredOwner.OwnerId, registeredState.CountryStatesId);
+                        .UpdateProperty(
+                            registeredProperty.PropertyGuid, name, address, price, codeInternal, year, registeredOwner.OwnerGuid, registeredState.CountryStatesId);
 
                         if (registeredProperty.Price != price)
                         {
@@ -84,7 +85,7 @@ namespace Properties.Application.BussinesCases.UpdateProperty
                             .ConfigureAwait(false);
                         }
 
-                        this._outputPort?.Ok(property);
+                        this._outputPort?.Ok(updatedProperty);
                     }
                 }
             }
@@ -109,7 +110,7 @@ namespace Properties.Application.BussinesCases.UpdateProperty
         private async Task Update(Property property)
         {
             await this._propertyRepository
-                .Create(property)
+                .Update(property)
                 .ConfigureAwait(false);
 
             await this._unitOfWork

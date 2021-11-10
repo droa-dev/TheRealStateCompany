@@ -3,7 +3,6 @@ using Properties.Domain;
 using Properties.Domain.Factories;
 using Properties.Domain.Repositories;
 using Properties.Domain.ValueObjects;
-using System;
 using System.Threading.Tasks;
 
 namespace Properties.Application.BussinesCases.CreateProperty
@@ -40,26 +39,29 @@ namespace Properties.Application.BussinesCases.CreateProperty
 
         public void SetOutputPort(IOutputPort outputPort) => this._outputPort = outputPort;
 
-        public Task Execute(string name, string address, decimal price, decimal tax, string codeInternal, string year, decimal ownerIdentification, string countryStateAbb) =>
+        public Task Execute(string name, string address, decimal price, decimal tax, 
+            string codeInternal, string year, decimal ownerIdentification, string countryStateAbb) =>
             this.CreateProperty(
-                new Name(name), new Address(address), new Money(price), new Money(tax), codeInternal, year, new Identification(ownerIdentification), new Abbreviation(countryStateAbb));
+                new Name(name), new Address(address), new Money(price), new Money(tax), 
+                codeInternal, year, new Identification(ownerIdentification), new Abbreviation(countryStateAbb));
 
         private async Task CreateProperty(
-            Name name, Address address, Money price, Money tax, string codeInternal, string year, Identification ownerIdentification, Abbreviation countryStateAbb)
+            Name name, Address address, Money price, Money tax, string codeInternal, 
+            string year, Identification ownerIdentification, Abbreviation countryStateAbb)
         {
             Owner owner = await this._ownerRepository
                 .GetOwner(ownerIdentification)
                 .ConfigureAwait(false); ;
 
             if (owner is Owner registeredOwner)
-            {                
+            {
                 CountryStates countryStates = await this._countryStatesRepository
                 .GetCountryState(countryStateAbb);
 
                 if (countryStates is CountryStates registeredState)
                 {
                     Property property = this._propertyFactory
-                    .NewProperty(name, address, price, codeInternal, year, registeredOwner.OwnerId, registeredState.CountryStatesId);
+                    .NewProperty(name, address, price, codeInternal, year, registeredOwner.OwnerGuid, registeredState.CountryStatesId);
 
                     PropertyTrace propertyTrace = this._propertyTraceFactory
                         .NewPropertyTrace(name, price, tax, property.PropertyGuid);

@@ -3,7 +3,7 @@ using System;
 
 namespace Properties.Domain
 {
-    public sealed class PropertyNull
+    public sealed class PropertyNull : IProperty
     {
         public static PropertyNull Instance { get; } = new PropertyNull();
         public PropertyId PropertyId => new PropertyId(0);

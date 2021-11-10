@@ -5,7 +5,7 @@ namespace Properties.Domain
 {
     public class Property : IProperty
     {
-        public Property(PropertyGuid propertyGuid, Name name, Address address, Money price, string codeInternal, string year, OwnerId ownerId, CountryStatesId countryStatesId) 
+        public Property(PropertyGuid propertyGuid, Name name, Address address, Money price, string codeInternal, string year, OwnerGuid ownerGuid, CountryStatesId countryStatesId) 
         {
             this.PropertyGuid = propertyGuid;
             this.Name = name;
@@ -13,7 +13,7 @@ namespace Properties.Domain
             this.Price = price;
             this.CodeInternal = codeInternal;
             this.Year = year;
-            this.OwnerId = ownerId;
+            this.OwnerGuid = ownerGuid;
             this.CountryStatesId = countryStatesId;
         }
         public PropertyId PropertyId { get; }
@@ -23,10 +23,11 @@ namespace Properties.Domain
         public Money Price { get; }
         public string CodeInternal { get; set; }
         public string Year { get; set; }
-        public OwnerId OwnerId { get; }
+        public OwnerGuid OwnerGuid { get; set; }
         public Owner? Owner { get; set; }
         public CountryStatesId CountryStatesId { get; }
-        public CountryStates? CountryStates { get; set; }        
+        public CountryStates CountryStates { get; set; }        
+        public PropertyImage? PropertyImage { get; set; }
         public PropertyTraceCollection PropertyTraceCollection { get; } = new PropertyTraceCollection();
     }
 }

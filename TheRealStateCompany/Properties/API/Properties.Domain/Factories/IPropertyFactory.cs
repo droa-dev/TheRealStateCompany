@@ -15,7 +15,7 @@ namespace Properties.Domain.Factories
         /// <param name="ownerId">owner id relation</param>
         /// <param name="countryStatesId">country state relation</param>
         /// <returns>New Property instance.</returns>
-        Property NewProperty(Name name, Address address, Money price, string codeInternal, string year, OwnerId ownerId, CountryStatesId countryStatesId);
+        Property NewProperty(Name name, Address address, Money price, string codeInternal, string year, OwnerGuid ownerGuid, CountryStatesId countryStatesId);
 
         /// <summary>
         ///     Updates a Property instance.
@@ -29,7 +29,7 @@ namespace Properties.Domain.Factories
         /// <param name="ownerId">owner id relation</param>
         /// <param name="countryStatesId">country state relation</param>
         /// <returns>New Property instance.</returns>
-        Property UpdateProperty(PropertyGuid propertyGuid, Name name, Address address, Money price, string codeInternal, string year, OwnerId ownerId, CountryStatesId countryStatesId);
+        Property UpdateProperty(PropertyGuid propertyGuid, Name name, Address address, Money price, string codeInternal, string year, OwnerGuid ownerGuid, CountryStatesId countryStatesId);
 
         /// <summary>
         ///     Creates a new PropertyFilters instance.
@@ -48,8 +48,8 @@ namespace Properties.Domain.Factories
         /// </summary>
         /// <param name="fileName">fileName</param>
         /// <param name="file">file</param>
-        /// /// <param name="propertyId">propertyId relation</param>       
+        /// /// <param name="propertyGuid">propertyId relation</param>       
         /// <returns>New PropertyImage instance.</returns>
-        PropertyImage NewPropertyImage(Name fileName, File file, PropertyId propertyId);
+        PropertyImage NewPropertyImage(Name fileName, File file, PropertyGuid propertyGuid);
     }
 }

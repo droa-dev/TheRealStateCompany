@@ -38,14 +38,14 @@ namespace Properties.Application.BussinesCases.AddPropertyImage
         private async Task AddPropertyImage(
             Name fileName, File file, PropertyGuid propertyGuid)
         {
-            Property property = await _propertyRepository
+            IProperty property = await _propertyRepository
                 .GetProperty(propertyGuid)
                 .ConfigureAwait(false);
 
             if (property is Property registeredProperty)
             {
                 PropertyImage propertyImage = _propertyFactory
-                    .NewPropertyImage(fileName, file, registeredProperty.PropertyId);
+                    .NewPropertyImage(fileName, file, registeredProperty.PropertyGuid);
 
                 await this.Create(propertyImage)
                     .ConfigureAwait(false);

@@ -3,21 +3,22 @@
 namespace Properties.Domain.ValueObjects
 {
     public readonly struct Name : IEquatable<Name>
-    {
-        private readonly string _textName;
+    {   
         public Name(string textName)
         {
             if (string.IsNullOrWhiteSpace(textName))
-                _textName = string.Empty;
+                TextName = string.Empty;
 
-            _textName = textName;
+            TextName = textName;
         }
+
+        public string TextName { get; }
         public override bool Equals(object? obj) =>
            obj is Name o && this.Equals(o);
 
-        public bool Equals(Name other) => this._textName == other._textName;
+        public bool Equals(Name other) => this.TextName == other.TextName;
 
-        public override string ToString() => _textName;
+        public override string ToString() => TextName;
 
         public static bool operator ==(Name left, Name right)
         {
@@ -28,6 +29,6 @@ namespace Properties.Domain.ValueObjects
         {
             return !(left == right);
         }
-        public override int GetHashCode() => HashCode.Combine(this._textName);
+        public override int GetHashCode() => HashCode.Combine(this.TextName);
     }
 }

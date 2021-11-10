@@ -40,7 +40,7 @@ namespace Properties.Application.BussinesCases.ChangePropertyPrice
 
         private async Task ChangePropertyPrice(PropertyGuid propertyGuid, Money price, Money tax)
         {
-            Property property = await this._propertyRepository
+            IProperty property = await this._propertyRepository
                 .GetProperty(propertyGuid)
                 .ConfigureAwait(false);
 
@@ -49,7 +49,7 @@ namespace Properties.Application.BussinesCases.ChangePropertyPrice
                 Property propertyUpdated = this._propertyFactory
                     .NewProperty(
                     registeredProperty.Name, registeredProperty.Address, price, registeredProperty.CodeInternal, 
-                    registeredProperty.Year, registeredProperty.OwnerId, registeredProperty.CountryStatesId);
+                    registeredProperty.Year, registeredProperty.OwnerGuid, registeredProperty.CountryStatesId);
 
                 PropertyTrace propertyTrace = this._propertyTraceFactory
                         .NewPropertyTrace(registeredProperty.Name, price, tax, registeredProperty.PropertyGuid);
@@ -57,7 +57,7 @@ namespace Properties.Application.BussinesCases.ChangePropertyPrice
                 await this.ChangePrice(propertyUpdated, propertyTrace)
                     .ConfigureAwait(false);
 
-                this._outputPort?.Ok(property);
+                this._outputPort?.Ok(propertyUpdated);
             }
 
             this._outputPort.NotFound();

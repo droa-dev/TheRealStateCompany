@@ -6,8 +6,8 @@ namespace Properties.Domain.Repositories
 {
     public interface IPropertyRepository
     {
-        Task<Property> GetProperty(PropertyId propertyId);
-        Task<Property> GetProperty(PropertyGuid propertyGuid);
+        Task<IProperty> GetProperty(PropertyId propertyId);
+        Task<IProperty> GetProperty(PropertyGuid propertyGuid);
         Task Update(Property property);
         Task Create(Property property);
         Task<IList<Property>> GetPropertiesFilter(PropertyFilters filters);

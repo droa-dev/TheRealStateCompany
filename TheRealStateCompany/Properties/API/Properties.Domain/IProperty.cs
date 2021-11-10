@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Properties.Domain.ValueObjects;
 
 namespace Properties.Domain
 {
     public interface IProperty
     {
+        /// <summary>
+        ///     Gets guid.
+        /// </summary>
+        PropertyGuid PropertyGuid { get; }
     }
 }

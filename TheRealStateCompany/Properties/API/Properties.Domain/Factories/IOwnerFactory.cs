@@ -14,6 +14,6 @@ namespace Properties.Domain.Factories
         /// /// <param name="photo">photo</param>
         /// /// <param name="birthday">birthday</param>       
         /// <returns>New Owner instance.</returns>
-        Owner NewOwner(Identification identification, Name name, Address address, File photo, DateTime birthday);
+        Owner NewOwner(Identification identification, Name name, Address address, File? photo, DateTime? birthday);
     }
 }

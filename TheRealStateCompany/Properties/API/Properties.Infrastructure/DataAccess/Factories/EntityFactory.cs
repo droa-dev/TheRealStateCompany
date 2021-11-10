@@ -8,22 +8,22 @@ namespace Properties.Infrastructure.DataAccess.Factories
     public sealed class EntityFactory : IPropertyFactory, IOwnerFactory, IPropertyTraceFactory
     {
         /// <inheritdoc />
-        public Property NewProperty(Name name, Address address, Money price, string codeInternal, string year, OwnerId ownerId, CountryStatesId countryStatesId)
-            => new Property(new PropertyGuid(Guid.NewGuid()), name, address, price, codeInternal, year, ownerId, countryStatesId);
+        public Property NewProperty(Name name, Address address, Money price, string codeInternal, string year, OwnerGuid ownerGuid, CountryStatesId countryStatesId)
+            => new Property(new PropertyGuid(Guid.NewGuid()), name, address, price, codeInternal, year, ownerGuid, countryStatesId);
 
         /// <inheritdoc />
-        public Owner NewOwner(Identification identification, Name name, Address address, File photo, DateTime birthday)
+        public Owner NewOwner(Identification identification, Name name, Address address, File? photo, DateTime? birthday)
             => new Owner(new OwnerGuid(Guid.NewGuid()), identification, name, address, photo, birthday);
 
         /// <inheritdoc />
-        public PropertyImage NewPropertyImage(Name fileName, File file, PropertyId propertyId)
-            => new PropertyImage(new PropertyImageGuid(Guid.NewGuid()), fileName, file, new Enabled(true), propertyId);
+        public PropertyImage NewPropertyImage(Name fileName, File file, PropertyGuid propertyGuid)
+            => new PropertyImage(new PropertyImageGuid(Guid.NewGuid()), fileName, file, new Enabled(true), propertyGuid);
 
         /// <inheritdoc />
         public Property UpdateProperty(
             PropertyGuid propertyGuid, Name name, Address address, Money price, string codeInternal, 
-            string year, OwnerId ownerId, CountryStatesId countryStatesId)
-            => new Property(propertyGuid, name, address, price, codeInternal, year, ownerId, countryStatesId);
+            string year, OwnerGuid ownerguid, CountryStatesId countryStatesId)
+            => new Property(propertyGuid, name, address, price, codeInternal, year, ownerguid, countryStatesId);
 
         /// <inheritdoc />
         public PropertyFilters ListProperty(Identification? ownerIdentification, Abbreviation? countryStateAbb,

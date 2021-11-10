@@ -3,21 +3,22 @@
 namespace Properties.Domain.ValueObjects
 {
     public readonly struct Abbreviation : IEquatable<Abbreviation>
-    {
-        private readonly string _textAbbreviation;
+    {        
         public Abbreviation(string textAbbreviation)
         {
             if (string.IsNullOrWhiteSpace(textAbbreviation))
-                _textAbbreviation = string.Empty;
+                TextAbbreviation = string.Empty;
 
-            _textAbbreviation = textAbbreviation;
+            TextAbbreviation = textAbbreviation;
         }
+
+        public string TextAbbreviation { get; }
         public override bool Equals(object? obj) =>
            obj is Name o && this.Equals(o);
 
-        public bool Equals(Abbreviation other) => this._textAbbreviation == other._textAbbreviation;
+        public bool Equals(Abbreviation other) => this.TextAbbreviation == other.TextAbbreviation;
 
-        public override string ToString() => _textAbbreviation;
+        public override string ToString() => TextAbbreviation;
 
         public static bool operator ==(Abbreviation left, Abbreviation right)
         {
@@ -28,6 +29,6 @@ namespace Properties.Domain.ValueObjects
         {
             return !(left == right);
         }
-        public override int GetHashCode() => HashCode.Combine(this._textAbbreviation);
+        public override int GetHashCode() => HashCode.Combine(this.TextAbbreviation);
     }
 }

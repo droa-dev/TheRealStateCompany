@@ -7,5 +7,6 @@ namespace Properties.Domain
         public CountryStatesId CountryStatesId { get; set; }
         public Name Name { get; set; }
         public Abbreviation Abbrev { get; set; }
+        public Property Property { get; set; }
     }
 }
