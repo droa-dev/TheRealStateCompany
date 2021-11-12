@@ -90,7 +90,7 @@ namespace Properties.Application.BussinesCases.UpdateProperty
                 }
             }
 
-            this._outputPort.NotFound();
+            this._outputPort?.NotFound();
         }
 
         private async Task Update(Property property, PropertyTrace propertyTrace)

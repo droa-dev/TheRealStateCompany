@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Properties.Application.BussinesCases.AddPropertyImage
 {
+    /// <inheritdoc />
     public class AddPropertyImageUseCase : IAddPropertyImageUseCase
     {
         private readonly IPropertyImageRepository _propertyImageRepository;
@@ -16,6 +17,13 @@ namespace Properties.Application.BussinesCases.AddPropertyImage
         private readonly IUnitOfWork _unitOfWork;
         private IOutputPort _outputPort;
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="AddPropertyImageUseCase" /> class.
+        /// </summary>
+        /// <param name="propertyImageRepository">Property Image Repository</param>
+        /// <param name="propertyRepository">Property Repository</param>
+        /// <param name="propertyFactory">Property Factory</param>
+        /// <param name="unitOfWork"></param>
         public AddPropertyImageUseCase(
             IPropertyImageRepository propertyImageRepository,
             IPropertyRepository propertyRepository,            
@@ -29,8 +37,10 @@ namespace Properties.Application.BussinesCases.AddPropertyImage
             _outputPort = new AddPropertyImagePresenter();
         }
 
+        /// <inheritdoc />
         public void SetOutputPort(IOutputPort outputPort) => this._outputPort = outputPort;
 
+        /// <inheritdoc />
         public Task Execute(string fileName, byte[] file, Guid propertyGuid) =>
             this.AddPropertyImage(
                 new Name(fileName), new File(file), new PropertyGuid(propertyGuid));
@@ -53,7 +63,7 @@ namespace Properties.Application.BussinesCases.AddPropertyImage
                 this._outputPort?.Ok(propertyImage);
             }
 
-            this._outputPort.NotFound();
+            this._outputPort?.NotFound();
         }
 
         private async Task Create(PropertyImage propertyImage)

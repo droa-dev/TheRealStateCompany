@@ -32,6 +32,6 @@ namespace Properties.Infrastructure.DataAccess.Factories
 
         /// <inheritdoc />
         public PropertyTrace NewPropertyTrace(Name name, Money value, Money tax, PropertyGuid propertyGuid)
-            => new PropertyTrace(new PropertyTraceGuid(Guid.NewGuid()), DateTime.Now, name, value, tax, propertyGuid);
+            => new PropertyTrace(new PropertyTraceGuid(Guid.NewGuid()), DateTime.Now, name, value, tax, propertyGuid);        
     }
 }

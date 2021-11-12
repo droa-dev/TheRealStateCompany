@@ -60,7 +60,7 @@ namespace Properties.Application.BussinesCases.ChangePropertyPrice
                 this._outputPort?.Ok(propertyUpdated);
             }
 
-            this._outputPort.NotFound();
+            this._outputPort?.NotFound();
         }
 
         private async Task ChangePrice(Property property, PropertyTrace propertyTrace)

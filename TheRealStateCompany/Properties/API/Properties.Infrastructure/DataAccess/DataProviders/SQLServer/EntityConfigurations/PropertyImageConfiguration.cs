@@ -27,8 +27,8 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer.EntityCon
                 .HasConversion(
                     v => v.Id,
                     v => new PropertyImageId(v))
-                .IsRequired()
-                .UseIdentityColumn();
+                .IsRequired();
+                //.UseIdentityColumn();
 
             builder.Property(b => b.PropertyImageGuid)
                 .HasConversion(
@@ -53,7 +53,7 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer.EntityCon
                     value => new Enabled(value))
                 .IsRequired();
 
-            builder.HasOne(x => x.Property)
+            builder.HasOne(x => x.Property!)
                .WithOne(b => b.PropertyImage!)
                .HasForeignKey<PropertyImage>(b => b.PropertyGuid)
                .OnDelete(DeleteBehavior.Cascade);

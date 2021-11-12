@@ -5,10 +5,10 @@ namespace Properties.Domain
 {
     public class Owner
     {
-        public Owner(OwnerGuid ownerGuid, Identification identification, Name name, Address address, File? photo, DateTime? birthday) 
+        public Owner(OwnerGuid ownerGuid, Identification identificationNumber, Name name, Address address, File? photo, DateTime? birthday) 
         {
             this.OwnerGuid = ownerGuid;
-            this.IdentificationNumber = identification;
+            this.IdentificationNumber = identificationNumber;
             this.Name = name;
             this.Address = address;
             this.Photo = photo;

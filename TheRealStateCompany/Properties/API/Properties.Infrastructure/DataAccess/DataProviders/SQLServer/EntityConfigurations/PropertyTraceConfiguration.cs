@@ -27,14 +27,14 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer.EntityCon
                 .HasConversion(
                     v => v.Id,
                     v => new PropertyTraceGuid(v))
-                .IsRequired()
-                .UseIdentityColumn();
+                .IsRequired();
 
             builder.Property(b => b.PropertyTraceId)
                 .HasConversion(
                     value => value.Id,
                     value => new PropertyTraceId(value))
                 .IsRequired();
+                //.UseIdentityColumn();
 
             builder.Property(b => b.DateSale)
                 .IsRequired();
@@ -56,7 +56,7 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer.EntityCon
                     value => new Money(value))
                 .IsRequired();
 
-            builder.HasOne(x => x.Property)
+            builder.HasOne(x => x.Property!)
                .WithMany(b => b.PropertyTraceCollection!)
                .HasForeignKey(b => b.PropertyGuid)
                .OnDelete(DeleteBehavior.Cascade);

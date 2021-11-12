@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace Properties.Application.BussinesCases.AddPropertyImage
 {
+    /// <summary>
+    ///     Add Property Image
+    /// </summary>
     public interface IAddPropertyImageUseCase
     {
         /// <summary>

@@ -73,7 +73,7 @@ namespace Properties.Application.BussinesCases.CreateProperty
                 }
             }
 
-            this._outputPort.NotFound();
+            this._outputPort?.NotFound();
         }
 
         private async Task Create(Property property, PropertyTrace propertyTrace)

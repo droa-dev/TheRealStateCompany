@@ -2,9 +2,12 @@
 
 namespace Properties.Application.BussinesCases.CreateProperty
 {
+    /// <summary>
+    ///     Create Property Presenter.
+    /// </summary>
     public sealed class CreatePropertyPresenter : IOutputPort
     {
-        public Property Property { get; private set; }
+        public Property? Property { get; private set; }
         public bool? IsNotFound { get; private set; }
         public bool? InvalidOutput { get; private set; }
         public void Invalid() => InvalidOutput = true;

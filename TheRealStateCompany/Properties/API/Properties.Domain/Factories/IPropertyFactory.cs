@@ -11,8 +11,8 @@ namespace Properties.Domain.Factories
         /// <param name="address">address</param>
         /// <param name="price">price</param>
         /// <param name="codeInternal">code internal</param>
-        /// <param name="year">year</param>
-        /// <param name="ownerId">owner id relation</param>
+        /// <param name="year">year</param>        
+        /// <param name="ownerGuid">ownerGuid</param>      
         /// <param name="countryStatesId">country state relation</param>
         /// <returns>New Property instance.</returns>
         Property NewProperty(Name name, Address address, Money price, string codeInternal, string year, OwnerGuid ownerGuid, CountryStatesId countryStatesId);
@@ -26,7 +26,7 @@ namespace Properties.Domain.Factories
         /// <param name="price">price</param>
         /// <param name="codeInternal">code internal</param>
         /// <param name="year">year</param>
-        /// <param name="ownerId">owner id relation</param>
+        /// <param name="ownerGuid">owner id relation</param>
         /// <param name="countryStatesId">country state relation</param>
         /// <returns>New Property instance.</returns>
         Property UpdateProperty(PropertyGuid propertyGuid, Name name, Address address, Money price, string codeInternal, string year, OwnerGuid ownerGuid, CountryStatesId countryStatesId);

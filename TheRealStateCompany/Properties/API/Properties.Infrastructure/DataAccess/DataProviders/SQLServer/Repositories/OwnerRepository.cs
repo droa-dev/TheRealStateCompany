@@ -30,7 +30,7 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer.Repositor
                 .SingleOrDefaultAsync()
                 .ConfigureAwait(false);
 
-        public async Task Add(Owner owner) => await this._context
+        public async Task Create(Owner owner) => await this._context
                 .Owners
                 .AddAsync(owner)
                 .ConfigureAwait(false);

@@ -27,8 +27,8 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer.EntityCon
                 .HasConversion(
                     v => v.Id,
                     v => new OwnerId(v))
-                .IsRequired()
-                .UseIdentityColumn();
+                .IsRequired();
+                //.UseIdentityColumn();
 
             builder.Property(b => b.OwnerGuid)
                 .HasConversion(
@@ -56,7 +56,7 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer.EntityCon
 
             builder.Property(b => b.Photo)
                 .HasConversion(
-                    value => value.Value.FileBinary ?? Array.Empty<byte>(),
+                    value => value.HasValue ? value.Value.FileBinary : Array.Empty<byte>(),
                     value => new File(value));
 
             builder.Property(b => b.CreatedDate)

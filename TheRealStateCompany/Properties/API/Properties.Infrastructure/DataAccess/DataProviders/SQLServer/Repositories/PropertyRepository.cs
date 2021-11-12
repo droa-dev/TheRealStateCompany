@@ -61,8 +61,8 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer.Repositor
         public async Task<IList<Property>> GetPropertiesFilter(PropertyFilters filters) => await this._context
                 .Properties
                 .Where(e =>
-                 e.Owner.IdentificationNumber == (filters.OwnerIdenttification ?? e.Owner.IdentificationNumber)
-                 && e.CountryStates.Abbrev == (filters.StateAbbreviation ?? e.CountryStates.Abbrev)
+                 e.Owner!.IdentificationNumber == (filters.OwnerIdenttification ?? e.Owner.IdentificationNumber)
+                 && e.CountryStates!.Abbrev == (filters.StateAbbreviation ?? e.CountryStates.Abbrev)
                  && e.Price.Amount >= (filters.InitialPrice.HasValue ? filters.InitialPrice.Value.Amount : e.Price.Amount)
                  && e.Price.Amount <= (filters.MaxPrice.HasValue ? filters.MaxPrice.Value.Amount : e.Price.Amount)
                  && e.Year == (!string.IsNullOrEmpty(filters.Year) ? filters.Year : e.Year)

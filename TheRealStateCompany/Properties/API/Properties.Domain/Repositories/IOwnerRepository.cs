@@ -7,7 +7,7 @@ namespace Properties.Domain.Repositories
     {
         Task<Owner> GetOwner(OwnerId ownerId);
         Task<Owner> GetOwner(Identification identification);
-        Task Add(Owner owner);
+        Task Create(Owner owner);
         Task Update(Owner owner);
     }
 }
