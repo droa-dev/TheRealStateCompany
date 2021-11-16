@@ -8,7 +8,7 @@ namespace Properties.Domain.Repositories
     {
         Task Create(PropertyTrace propertyTrace);
         Task Update(PropertyTrace propertyTrace);
-        Task<PropertyTrace> GetPropertyTrace(PropertyTraceId propertyTraceId);
+        //Task<PropertyTrace> GetPropertyTrace(PropertyTraceId propertyTraceId);
         Task<IList<PropertyTrace>> GetPropertyTraces(PropertyGuid propertyGuid);
     }
 }

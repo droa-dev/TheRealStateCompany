@@ -18,13 +18,8 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer.Repositor
         public OwnerRepository(RealStateDbContext context) => this._context = context ??
                                                                           throw new ArgumentNullException(
                                                                               nameof(context));
-        public async Task<Owner> GetOwner(OwnerId ownerId) => await this._context
-                .Owners
-                .Where(e => e.OwnerId == ownerId).Select(e => e)
-                .SingleOrDefaultAsync()
-                .ConfigureAwait(false);
 
-        public async Task<Owner> GetOwner(Identification identification) => await this._context
+        public async Task<IOwner> GetOwner(Identification identification) => await this._context
                 .Owners
                 .Where(e => e.IdentificationNumber == identification).Select(e => e)
                 .SingleOrDefaultAsync()

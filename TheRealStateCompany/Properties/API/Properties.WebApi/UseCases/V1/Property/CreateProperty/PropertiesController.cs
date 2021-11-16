@@ -41,6 +41,9 @@ namespace Properties.WebApi.UseCases.V1.Property.CreateProperty
         void IOutputPort.Ok(Domain.Property property) =>
             this._viewModel = this.Ok(new CreatePropertyResponse(new PropertyModel(property)));
 
+        void IOutputPort.Created(Domain.Property property) =>
+            this._viewModel = this.Created(string.Empty, new CreatePropertyResponse(new PropertyModel(property)));
+
 
         /// <summary>
         ///     Create a property.
@@ -55,10 +58,10 @@ namespace Properties.WebApi.UseCases.V1.Property.CreateProperty
         /// <param name="tax"></param>
         /// <param name="codeInternal"></param>
         /// <param name="year"></param>
-        /// <param name="ownerId"></param>
+        /// <param name="ownerIdentification"></param>
         /// <param name="stateAbbr"></param>
         /// <returns>The newly registered property.</returns>
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CreatePropertyResponse))]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(CreatePropertyResponse))]
@@ -71,14 +74,14 @@ namespace Properties.WebApi.UseCases.V1.Property.CreateProperty
             [FromForm][Required] decimal tax,
             [FromForm][Required] string codeInternal,
             [FromForm][Required] string year,
-            [FromForm][Required] decimal ownerId,
+            [FromForm][Required] decimal ownerIdentification,
             [FromForm][Required] string stateAbbr)
         {
             useCase.SetOutputPort(this);
 
             await useCase.Execute(
                 name: name, address: address, price: price, tax: tax, codeInternal: codeInternal,
-                year: year, ownerIdentification: ownerId, countryStateAbb: stateAbbr)
+                year: year, ownerIdentification: ownerIdentification, countryStateAbb: stateAbbr)
                 .ConfigureAwait(false);
 
             return this._viewModel!;

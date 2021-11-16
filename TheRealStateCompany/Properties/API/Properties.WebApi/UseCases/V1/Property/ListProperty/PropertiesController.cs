@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.FeatureManagement.Mvc;
@@ -7,7 +8,6 @@ using Properties.Application.Services;
 using Properties.WebApi.Modules.Common;
 using Properties.WebApi.Modules.Common.Features;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace Properties.WebApi.UseCases.V1.Property.ListProperty
@@ -47,17 +47,17 @@ namespace Properties.WebApi.UseCases.V1.Property.ListProperty
         /// <response code="400">Bad request.</response>
         /// <response code="404">Not Found.</response>
         /// <returns>List of properties filtered</returns>
-        //[Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("FilteredList")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ListPropertyResponse))]
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
         public async Task<IActionResult> Post([FromServices] IListPropertyUseCase useCase,
-            [FromForm][Required] decimal ownerId,
-            [FromForm][Required] string stateAbbr,
-            [FromForm][Required] decimal initialPrice,
-            [FromForm][Required] decimal maxPrice,
-            [FromForm][Required] string year,
-            [FromForm][Required] string codeInternal)
+            [FromForm] decimal? ownerId,
+            [FromForm] string? stateAbbr,
+            [FromForm] decimal? initialPrice,
+            [FromForm] decimal? maxPrice,
+            [FromForm] string? year,
+            [FromForm] string? codeInternal)
         {
             useCase.SetOutputPort(this);
 

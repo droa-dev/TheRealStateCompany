@@ -1,5 +1,4 @@
 ﻿using Properties.Domain.ValueObjects;
-using System;
 
 namespace Properties.Domain.Factories
 {

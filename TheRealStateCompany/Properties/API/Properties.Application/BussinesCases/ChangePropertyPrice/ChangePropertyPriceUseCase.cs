@@ -12,7 +12,7 @@ namespace Properties.Application.BussinesCases.ChangePropertyPrice
     {
         private readonly IPropertyTraceRepository _propertyTraceRepository;
         private readonly IPropertyTraceFactory _propertyTraceFactory;
-        private readonly IPropertyRepository _propertyRepository;        
+        private readonly IPropertyRepository _propertyRepository;
         private readonly IPropertyFactory _propertyFactory;
         private readonly IUnitOfWork _unitOfWork;
         private IOutputPort _outputPort;
@@ -20,13 +20,13 @@ namespace Properties.Application.BussinesCases.ChangePropertyPrice
         public ChangePropertyPriceUseCase(
             IPropertyTraceRepository propertyTraceRepository,
             IPropertyTraceFactory propertyTraceFactory,
-            IPropertyRepository propertyRepository,            
+            IPropertyRepository propertyRepository,
             IPropertyFactory propertyFactory,
             IUnitOfWork unitOfWork)
         {
             _propertyTraceRepository = propertyTraceRepository;
             _propertyTraceFactory = propertyTraceFactory;
-            _propertyRepository = propertyRepository;            
+            _propertyRepository = propertyRepository;
             _propertyFactory = propertyFactory;
             _unitOfWork = unitOfWork;
             _outputPort = new ChangePropertyPricePresenter();
@@ -41,23 +41,24 @@ namespace Properties.Application.BussinesCases.ChangePropertyPrice
         private async Task ChangePropertyPrice(PropertyGuid propertyGuid, Money price, Money tax)
         {
             IProperty property = await this._propertyRepository
-                .GetProperty(propertyGuid)
+                .GetPropertyForUpdate(propertyGuid)
                 .ConfigureAwait(false);
 
             if (property is Property registeredProperty)
             {
                 Property propertyUpdated = this._propertyFactory
-                    .NewProperty(
-                    registeredProperty.Name, registeredProperty.Address, price, registeredProperty.CodeInternal, 
+                    .UpdateProperty(
+                    registeredProperty.PropertyGuid, registeredProperty.Name, registeredProperty.Address, price, registeredProperty.CodeInternal,
                     registeredProperty.Year, registeredProperty.OwnerGuid, registeredProperty.CountryStatesId);
 
                 PropertyTrace propertyTrace = this._propertyTraceFactory
-                        .NewPropertyTrace(registeredProperty.Name, price, tax, registeredProperty.PropertyGuid);
+                        .NewPropertyTrace(propertyUpdated.Name, price, tax, propertyUpdated.PropertyGuid);
 
                 await this.ChangePrice(propertyUpdated, propertyTrace)
                     .ConfigureAwait(false);
 
                 this._outputPort?.Ok(propertyUpdated);
+                return;
             }
 
             this._outputPort?.NotFound();

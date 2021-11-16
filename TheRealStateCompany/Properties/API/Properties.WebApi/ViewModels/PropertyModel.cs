@@ -6,7 +6,7 @@ namespace Properties.WebApi.ViewModels
 {
     public sealed class PropertyModel
     {
-        public PropertyModel(Property property) 
+        public PropertyModel(Property property)
         {
             this.PropertyId = property.PropertyGuid.Id;
             this.Name = property.Name.TextName;

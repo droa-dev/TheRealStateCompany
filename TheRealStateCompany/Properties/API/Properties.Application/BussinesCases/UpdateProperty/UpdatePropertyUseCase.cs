@@ -40,54 +40,69 @@ namespace Properties.Application.BussinesCases.UpdateProperty
 
         public void SetOutputPort(IOutputPort outputPort) => this._outputPort = outputPort;
 
-        public Task Execute(Guid propertyGuid, string name, string address, decimal price,
-            decimal tax, string codeInternal, string year, decimal ownerIdentification, string countryStateAbb) =>
+        public Task Execute(Guid propertyGuid, string? name, string? address, decimal? price,
+            decimal? tax, string? codeInternal, string? year, decimal? ownerIdentification, string? countryStateAbb) =>
             this.UpdateProperty(
-                new PropertyGuid(propertyGuid), new Name(name), new Address(address), new Money(price),
-                new Money(tax), codeInternal, year, new Identification(ownerIdentification), new Abbreviation(countryStateAbb));
+                new PropertyGuid(propertyGuid), new Name(name ?? string.Empty), new Address(address ?? string.Empty), new Money(price.GetValueOrDefault()),
+                new Money(tax.GetValueOrDefault()), codeInternal, year, new Identification(ownerIdentification.GetValueOrDefault()),
+                new Abbreviation(countryStateAbb ?? string.Empty));
 
         private async Task UpdateProperty(
-            PropertyGuid propertyGuid, Name name, Address address, Money price, Money tax,
-            string codeInternal, string year, Identification ownerIdentification, Abbreviation countryStateAbb)
+            PropertyGuid propertyGuid, Name? name, Address? address, Money? price, Money? tax,
+            string? codeInternal, string? year, Identification? ownerIdentification, Abbreviation? countryStateAbb)
         {
+            OwnerGuid ownerGuid = new();
+            CountryStatesId countryStatesId = new();
+
             IProperty property = await this._propertyRepository
-                .GetProperty(propertyGuid)
+                .GetPropertyForUpdate(propertyGuid)
                 .ConfigureAwait(false);
 
             if (property is Property registeredProperty)
             {
-                Owner owner = await this._ownerRepository
-                .GetOwner(ownerIdentification)
-                .ConfigureAwait(false); ;
-
-                if (owner is Owner registeredOwner)
+                if (ownerIdentification.HasValue && !ownerIdentification.Value.IsZero())
                 {
-                    CountryStates countryStates = await this._countryStatesRepository
-                    .GetCountryState(countryStateAbb);
+                    IOwner owner = await this._ownerRepository
+                        .GetOwner(ownerIdentification.Value)
+                        .ConfigureAwait(false); ;
 
-                    if (countryStates is CountryStates registeredState)
-                    {
-                        Property updatedProperty = this._propertyFactory
-                        .UpdateProperty(
-                            registeredProperty.PropertyGuid, name, address, price, codeInternal, year, registeredOwner.OwnerGuid, registeredState.CountryStatesId);
-
-                        if (registeredProperty.Price != price)
-                        {
-                            PropertyTrace propertyTrace = this._propertyTraceFactory
-                            .NewPropertyTrace(name, price, tax, property.PropertyGuid);
-
-                            await this.Update(updatedProperty, propertyTrace)
-                            .ConfigureAwait(false);
-                        }
-                        else
-                        {
-                            await this.Update(updatedProperty)
-                            .ConfigureAwait(false);
-                        }
-
-                        this._outputPort?.Ok(updatedProperty);
-                    }
+                    if (owner != null) ownerGuid = owner.OwnerGuid;
                 }
+
+                if (countryStateAbb.HasValue && !string.IsNullOrEmpty(countryStateAbb.Value.TextAbbreviation))
+                {
+                    CountryStates state = await this._countryStatesRepository
+                   .GetCountryState(countryStateAbb.Value)
+                   .ConfigureAwait(false);
+
+                    if (state != null) countryStatesId = state.CountryStatesId;
+                }
+
+                Property updatedProperty = this._propertyFactory
+                        .UpdateProperty(
+                            registeredProperty.PropertyGuid,
+                            (name.HasValue && !string.IsNullOrEmpty(name.Value.TextName)) ? name : registeredProperty.Name,
+                            (address.HasValue && !string.IsNullOrEmpty(address.Value.TextAddress)) ? address : registeredProperty.Address,
+                            price ?? registeredProperty.Price, codeInternal ?? registeredProperty.CodeInternal,
+                            year ?? registeredProperty.Year, ownerGuid.Id == Guid.Empty ? registeredProperty.OwnerGuid : ownerGuid,
+                            countryStatesId.IsZero() ? registeredProperty.CountryStatesId : countryStatesId);
+
+                if (price.HasValue && !price.Value.IsZero() && registeredProperty.Price != price)
+                {
+                    PropertyTrace propertyTrace = this._propertyTraceFactory
+                    .NewPropertyTrace(updatedProperty.Name, updatedProperty.Price, tax!.Value, registeredProperty.PropertyGuid);
+
+                    await this.Update(updatedProperty, propertyTrace)
+                    .ConfigureAwait(false);
+                }
+                else
+                {
+                    await this.Update(updatedProperty)
+                    .ConfigureAwait(false);
+                }
+
+                this._outputPort?.Ok(updatedProperty);
+                return;
             }
 
             this._outputPort?.NotFound();

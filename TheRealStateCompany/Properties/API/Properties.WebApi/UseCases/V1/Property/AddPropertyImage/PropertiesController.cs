@@ -46,9 +46,9 @@ namespace Properties.WebApi.UseCases.V1.Property.AddPropertyImage
             this._viewModel = this.Ok(new AddPropertyImageResponse(new PropertyImageModel(propertyImage)));
 
         /// <summary>
-        ///     Create a property.
+        ///     Add image for an existing property.
         /// </summary>        
-        /// <response code="201">Property was created successfully.</response>
+        /// <response code="201">Iamge was uploaded successfully.</response>
         /// <response code="400">Bad request.</response>
         /// <response code="404">Not Found.</response>
         /// <param name="useCase">Use case.</param>
@@ -56,7 +56,7 @@ namespace Properties.WebApi.UseCases.V1.Property.AddPropertyImage
         /// <param name="fileByteArray"></param>
         /// <param name="propertyId"></param>        
         /// <returns>The newly registered image for the property.</returns>
-        //[Authorize]
+        [Authorize]
         [HttpPost("Image/Add")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(AddPropertyImageResponse))]
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Post))]

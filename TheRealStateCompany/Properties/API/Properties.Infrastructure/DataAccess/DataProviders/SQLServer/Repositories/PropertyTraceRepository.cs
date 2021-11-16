@@ -36,15 +36,9 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer.Repositor
                 .ConfigureAwait(false);
         }
 
-        public async Task<PropertyTrace> GetPropertyTrace(PropertyTraceId propertyTraceId) => await this._context
-                .PropertyTraces
-                .Where(e => e.PropertyTraceId == propertyTraceId).Select(e => e)
-                .SingleOrDefaultAsync()
-                .ConfigureAwait(false);
-
         public async Task<IList<PropertyTrace>> GetPropertyTraces(PropertyGuid propertyGuid) => await this._context
                 .PropertyTraces
-                .Where(e => e.PropertyGuid == propertyGuid)
+                .Where(e => e.PropertyGuid == propertyGuid).Select(e => e)
                 .ToListAsync()
                 .ConfigureAwait(false);
     }

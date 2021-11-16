@@ -13,5 +13,6 @@ namespace Properties.Application.BussinesCases.CreateProperty
         public void Invalid() => InvalidOutput = true;
         public void NotFound() => IsNotFound = true;
         public void Ok(Property property) => Property = property;
+        public void Created(Property property) => Property = property;
     }
 }

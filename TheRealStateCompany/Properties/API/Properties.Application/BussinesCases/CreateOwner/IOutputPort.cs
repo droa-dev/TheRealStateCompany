@@ -8,7 +8,7 @@ namespace Properties.Application.BussinesCases.CreateOwner
         ///     Invalid input.
         /// </summary>
         void Invalid();
-        
+
         /// <summary>
         ///     Created Owner
         /// </summary>

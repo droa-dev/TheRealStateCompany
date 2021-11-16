@@ -59,26 +59,26 @@ namespace Properties.WebApi.UseCases.V1.Property.UpdateProperty
         /// <param name="ownerId"></param>
         /// <param name="stateAbbr"></param>
         /// <returns>The updated property.</returns>
-        //[Authorize]
+        [Authorize]
         [HttpPatch("{propertyGuid:guid}/Update")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UpdatePropertyResponse))]        
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UpdatePropertyResponse))]
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Patch))]
         public async Task<IActionResult> Update(
             [FromServices] IUpdatePropertyUseCase useCase,
             [FromForm][Required] Guid propertyGuid,
-            [FromForm][Required] string name,
-            [FromForm][Required] string address,
-            [FromForm][Required] decimal price,
-            [FromForm][Required] decimal tax,
-            [FromForm][Required] string codeInternal,
-            [FromForm][Required] string year,
-            [FromForm][Required] decimal ownerId,
-            [FromForm][Required] string stateAbbr)
+            [FromForm] string? name,
+            [FromForm] string? address,
+            [FromForm] decimal? price,
+            [FromForm] decimal? tax,
+            [FromForm] string? codeInternal,
+            [FromForm] string? year,
+            [FromForm] decimal? ownerId,
+            [FromForm] string? stateAbbr)
         {
             useCase.SetOutputPort(this);
 
             await useCase.Execute(
-                propertyGuid: propertyGuid, name: name, address: address, price: price, tax: tax, 
+                propertyGuid: propertyGuid, name: name, address: address, price: price, tax: tax,
                 codeInternal: codeInternal, year: year, ownerIdentification: ownerId, countryStateAbb: stateAbbr)
                 .ConfigureAwait(false);
 

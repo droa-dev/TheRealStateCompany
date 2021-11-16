@@ -30,7 +30,7 @@ namespace Properties.WebApi.Modules.Common.Extensions
             services.Decorate<IUpdatePropertyUseCase, UpdatePropertyValidationUseCase>();
 
             services.AddScoped<IAddPropertyImageUseCase, AddPropertyImageUseCase>();
-            services.Decorate<IAddPropertyImageUseCase, AddPropertyImageValidationUseCase>();            
+            services.Decorate<IAddPropertyImageUseCase, AddPropertyImageValidationUseCase>();
 
             services.AddScoped<IChangePropertyPriceUseCase, ChangePropertyPriceUseCase>();
             services.Decorate<IChangePropertyPriceUseCase, ChangePropertyPriceValidationUseCase>();

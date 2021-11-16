@@ -28,7 +28,7 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer.EntityCon
                     v => v.Id,
                     v => new CountryStatesId(v))
                 .IsRequired();
-                //.UseIdentityColumn();
+            //.UseIdentityColumn();
 
             builder.Property(b => b.Name)
                 .HasConversion(

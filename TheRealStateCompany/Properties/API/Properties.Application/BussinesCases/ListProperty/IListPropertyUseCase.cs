@@ -7,8 +7,8 @@ namespace Properties.Application.BussinesCases.ListProperty
         /// <summary>
         ///     Executes the Use Case
         /// </summary>
-        Task Execute(decimal? ownerIdentification, string countryStateAbb, decimal? initialPrice,
-            decimal? maxPrice, string year, string codeInternal);
+        Task Execute(decimal? ownerIdentification, string? countryStateAbb, decimal? initialPrice,
+            decimal? maxPrice, string? year, string? codeInternal);
         /// <summary>
         ///     Sets the Output Port.
         /// </summary>

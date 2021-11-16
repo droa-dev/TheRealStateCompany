@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 namespace Properties.Application.BussinesCases.CreateOwner
 {
     public sealed class CreateOwnerUseCase : ICreateOwnerUseCase
-    {        
-        private readonly IOwnerRepository _ownerRepository;        
+    {
+        private readonly IOwnerRepository _ownerRepository;
         private readonly IOwnerFactory _ownerFactory;
         private readonly IUnitOfWork _unitOfWork;
         private IOutputPort _outputPort;
 
-        public CreateOwnerUseCase(            
-            IOwnerRepository ownerRepository,            
+        public CreateOwnerUseCase(
+            IOwnerRepository ownerRepository,
             IOwnerFactory ownerFactory,
             IUnitOfWork unitOfWork)
-        {            
-            _ownerRepository = ownerRepository;            
+        {
+            _ownerRepository = ownerRepository;
             _ownerFactory = ownerFactory;
             _unitOfWork = unitOfWork;
             _outputPort = new CreateOwnerPresenter();

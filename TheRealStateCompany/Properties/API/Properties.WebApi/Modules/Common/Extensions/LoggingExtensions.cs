@@ -1,11 +1,11 @@
 ﻿namespace Properties.WebApi.Modules.Common.Extensions
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text.Json;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.Json;
 
     /// <summary>
     /// Logging Extensions.

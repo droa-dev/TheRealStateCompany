@@ -23,13 +23,6 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer.EntityCon
 
             builder.HasKey(b => b.PropertyImageGuid);
 
-            builder.Property(b => b.PropertyImageId)
-                .HasConversion(
-                    v => v.Id,
-                    v => new PropertyImageId(v))
-                .IsRequired();
-                //.UseIdentityColumn();
-
             builder.Property(b => b.PropertyImageGuid)
                 .HasConversion(
                     value => value.Id,

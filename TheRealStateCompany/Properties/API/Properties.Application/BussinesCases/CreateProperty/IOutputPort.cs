@@ -15,8 +15,13 @@ namespace Properties.Application.BussinesCases.CreateProperty
         void NotFound();
 
         /// <summary>
+        ///     Property already exist
+        /// </summary>
+        void Ok(Property property);
+
+        /// <summary>
         ///     Created Property
         /// </summary>
-        void Ok(Property property);        
+        void Created(Property property);
     }
 }

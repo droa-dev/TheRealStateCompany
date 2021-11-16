@@ -53,7 +53,7 @@ namespace Properties.WebApi.UseCases.V1.Property.ChangePropertyPrice
         /// <param name="price"></param>
         /// <param name="tax"></param>       
         /// <returns>The property updated.</returns>
-        //[Authorize]
+        [Authorize]
         [HttpPatch("{propertyGuid:guid}/ChangePropertyPrice")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ChangePropertyPriceResponse))]
         [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Patch))]

@@ -1,11 +1,11 @@
 ﻿namespace Properties.WebApi.Modules.Common.Extensions
 {
-    using System.Text.Json;
-    using System.Text.Json.Serialization;    
     using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.FeatureManagement;
     using Properties.WebApi.Modules.Common.Features;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
 
     /// <summary>
     ///     Custom Controller Extensions.

@@ -10,7 +10,7 @@ namespace Properties.Domain.ValueObjects
             this.FileBinary = filebinary;
 
         public override bool Equals(object? obj) =>
-           obj is Money o && this.Equals(o);
+           obj is File o && this.Equals(o);
 
         public bool Equals(File other) =>
             this.FileBinary == other.FileBinary;

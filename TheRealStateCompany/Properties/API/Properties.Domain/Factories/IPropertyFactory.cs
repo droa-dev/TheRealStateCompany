@@ -15,7 +15,9 @@ namespace Properties.Domain.Factories
         /// <param name="ownerGuid">ownerGuid</param>      
         /// <param name="countryStatesId">country state relation</param>
         /// <returns>New Property instance.</returns>
-        Property NewProperty(Name name, Address address, Money price, string codeInternal, string year, OwnerGuid ownerGuid, CountryStatesId countryStatesId);
+        Property NewProperty(
+            Name name, Address address, Money price, string codeInternal, string year,
+            OwnerGuid ownerGuid, CountryStatesId countryStatesId);
 
         /// <summary>
         ///     Updates a Property instance.
@@ -29,19 +31,23 @@ namespace Properties.Domain.Factories
         /// <param name="ownerGuid">owner id relation</param>
         /// <param name="countryStatesId">country state relation</param>
         /// <returns>New Property instance.</returns>
-        Property UpdateProperty(PropertyGuid propertyGuid, Name name, Address address, Money price, string codeInternal, string year, OwnerGuid ownerGuid, CountryStatesId countryStatesId);
+        Property UpdateProperty(
+            PropertyGuid propertyGuid, Name? name, Address? address, Money? price, string? codeInternal,
+            string? year, OwnerGuid? ownerGuid, CountryStatesId? countryStatesId);
 
         /// <summary>
         ///     Creates a new PropertyFilters instance.
         /// </summary>
-        /// <param name="ownerIdentification">propertyGuid</param>
-        /// <param name="countryStateAbb">name</param>
-        /// <param name="initialPrice">address</param>
-        /// <param name="maxPrice">price</param>
+        /// <param name="ownerGuid">ownerGuid</param>
+        /// <param name="countryStateId">countryStateId</param>
+        /// <param name="initialPrice">initialPrice</param>
+        /// <param name="maxPrice">maxPrice</param>
         /// <param name="year">year</param>
         /// <param name="codeInternal">code internal</param>
         /// <returns>New List Property instance.</returns>
-        PropertyFilters ListProperty(Identification? ownerIdentification, Abbreviation? countryStateAbb, Money? initialPrice, Money? maxPrice, string year, string codeInternal);
+        PropertyFilters ListProperty(
+            OwnerGuid? ownerGuid, CountryStatesId? countryStateId, Money? initialPrice,
+            Money? maxPrice, string year, string codeInternal);
 
         /// <summary>
         ///     Creates a new PropertyImage instance.

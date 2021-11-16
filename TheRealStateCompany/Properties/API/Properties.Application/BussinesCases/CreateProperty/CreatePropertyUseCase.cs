@@ -39,17 +39,17 @@ namespace Properties.Application.BussinesCases.CreateProperty
 
         public void SetOutputPort(IOutputPort outputPort) => this._outputPort = outputPort;
 
-        public Task Execute(string name, string address, decimal price, decimal tax, 
+        public Task Execute(string name, string address, decimal price, decimal tax,
             string codeInternal, string year, decimal ownerIdentification, string countryStateAbb) =>
             this.CreateProperty(
-                new Name(name), new Address(address), new Money(price), new Money(tax), 
+                new Name(name), new Address(address), new Money(price), new Money(tax),
                 codeInternal, year, new Identification(ownerIdentification), new Abbreviation(countryStateAbb));
 
         private async Task CreateProperty(
-            Name name, Address address, Money price, Money tax, string codeInternal, 
+            Name name, Address address, Money price, Money tax, string codeInternal,
             string year, Identification ownerIdentification, Abbreviation countryStateAbb)
         {
-            Owner owner = await this._ownerRepository
+            IOwner owner = await this._ownerRepository
                 .GetOwner(ownerIdentification)
                 .ConfigureAwait(false); ;
 
@@ -69,7 +69,8 @@ namespace Properties.Application.BussinesCases.CreateProperty
                     await this.Create(property, propertyTrace)
                         .ConfigureAwait(false);
 
-                    this._outputPort?.Ok(property);
+                    this._outputPort?.Created(property);
+                    return;
                 }
             }
 

@@ -4,17 +4,17 @@ namespace Properties.Domain
 {
     public class PropertyFilters
     {
-        public PropertyFilters(Identification? ownerIdentification, Abbreviation? countryStateAbb, Money? initialPrice, Money? maxPrice, string year, string codeInternal)
+        public PropertyFilters(OwnerGuid? ownerGuid, CountryStatesId? countryStatesId, Money? initialPrice, Money? maxPrice, string year, string codeInternal)
         {
-            this.OwnerIdenttification = ownerIdentification;
-            this.StateAbbreviation = countryStateAbb;
+            this.OwnerGuid = ownerGuid;
+            this.CountryStatesId = countryStatesId;
             this.InitialPrice = initialPrice;
             this.MaxPrice = maxPrice;
             this.Year = year;
             this.CodeInternal = codeInternal;
         }
-        public Identification? OwnerIdenttification { get; }
-        public Abbreviation? StateAbbreviation { get; set; }
+        public OwnerGuid? OwnerGuid { get; }
+        public CountryStatesId? CountryStatesId { get; set; }
         public Money? InitialPrice { get; set; }
         public Money? MaxPrice { get; set; }
         public string Year { get; set; }

@@ -3,7 +3,7 @@
 namespace Properties.Domain.ValueObjects
 {
     public readonly struct Name : IEquatable<Name>
-    {   
+    {
         public Name(string textName)
         {
             if (string.IsNullOrWhiteSpace(textName))

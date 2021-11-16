@@ -1,8 +1,8 @@
 ﻿namespace Properties.WebApi.Modules.Common.Extensions
 {
-    using System.IO;
     using Microsoft.AspNetCore.DataProtection;
     using Microsoft.Extensions.DependencyInjection;
+    using System.IO;
 
     /// <summary>
     ///     Data Protection Extensions.

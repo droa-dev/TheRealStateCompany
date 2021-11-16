@@ -5,7 +5,6 @@
     using Microsoft.Extensions.Options;
     using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
-    using System;
 
     /// <summary>
     ///     Configures the Swagger generation options.

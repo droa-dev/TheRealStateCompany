@@ -12,7 +12,7 @@ namespace Properties.Application.BussinesCases.AddPropertyImage
     public class AddPropertyImageUseCase : IAddPropertyImageUseCase
     {
         private readonly IPropertyImageRepository _propertyImageRepository;
-        private readonly IPropertyRepository _propertyRepository;       
+        private readonly IPropertyRepository _propertyRepository;
         private readonly IPropertyFactory _propertyFactory;
         private readonly IUnitOfWork _unitOfWork;
         private IOutputPort _outputPort;
@@ -26,12 +26,12 @@ namespace Properties.Application.BussinesCases.AddPropertyImage
         /// <param name="unitOfWork"></param>
         public AddPropertyImageUseCase(
             IPropertyImageRepository propertyImageRepository,
-            IPropertyRepository propertyRepository,            
+            IPropertyRepository propertyRepository,
             IPropertyFactory propertyFactory,
             IUnitOfWork unitOfWork)
         {
             _propertyImageRepository = propertyImageRepository;
-            _propertyRepository = propertyRepository;            
+            _propertyRepository = propertyRepository;
             _propertyFactory = propertyFactory;
             _unitOfWork = unitOfWork;
             _outputPort = new AddPropertyImagePresenter();
@@ -61,6 +61,7 @@ namespace Properties.Application.BussinesCases.AddPropertyImage
                     .ConfigureAwait(false);
 
                 this._outputPort?.Ok(propertyImage);
+                return;
             }
 
             this._outputPort?.NotFound();

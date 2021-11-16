@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Prometheus;
 using Properties.WebApi.Modules.Common.Extensions;
 using Properties.WebApi.Modules.Common.Features;
@@ -44,16 +43,6 @@ namespace Properties.WebApi
             IWebHostEnvironment env,
             IApiVersionDescriptionProvider provider)
         {
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
-            //else
-            //{
-            //    app.UseExceptionHandler("/api/V1/CustomError")
-            //        .UseHsts();
-            //}
-
             app
                 .UseProxy(this.Configuration)
                 .UseHealthChecks()

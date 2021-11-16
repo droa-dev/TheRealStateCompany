@@ -48,7 +48,7 @@
         /// <summary>
         ///     Use SQL Server Persistence.
         /// </summary>
-        SQLServer,        
+        SQLServer,
 
         /// <summary>
         ///     Use authentication.

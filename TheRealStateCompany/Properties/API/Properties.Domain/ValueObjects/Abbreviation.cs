@@ -3,7 +3,7 @@
 namespace Properties.Domain.ValueObjects
 {
     public readonly struct Abbreviation : IEquatable<Abbreviation>
-    {        
+    {
         public Abbreviation(string textAbbreviation)
         {
             if (string.IsNullOrWhiteSpace(textAbbreviation))

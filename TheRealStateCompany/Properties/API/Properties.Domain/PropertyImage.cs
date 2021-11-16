@@ -4,7 +4,7 @@ namespace Properties.Domain
 {
     public class PropertyImage
     {
-        public PropertyImage(PropertyImageGuid propertyImageGuid, Name fileName, File file, Enabled enabled, PropertyGuid propertyGuid) 
+        public PropertyImage(PropertyImageGuid propertyImageGuid, Name fileName, File file, Enabled enabled, PropertyGuid propertyGuid)
         {
             this.PropertyImageGuid = propertyImageGuid;
             this.FileName = fileName;
@@ -13,7 +13,7 @@ namespace Properties.Domain
             this.PropertyGuid = propertyGuid;
         }
         public PropertyImageGuid PropertyImageGuid { get; }
-        public PropertyImageId PropertyImageId { get; }
+        //public PropertyImageId PropertyImageId { get; }
         public Name FileName { get; }
         public File File { get; }
         public Enabled Enabled { get; }

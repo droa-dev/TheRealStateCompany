@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.FeatureManagement.Mvc;
 using Properties.Application.BussinesCases.CreateOwner;
@@ -17,7 +18,7 @@ namespace Properties.WebApi.UseCases.V1.Property.CreateOwner
     ///     Owners.
     /// </summary>
     [ApiVersion("1.0")]
-    [FeatureGate(CustomFeature.CreateProperty)]
+    [FeatureGate(CustomFeature.CreateOwner)]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class OwnersController : ControllerBase, IOutputPort
@@ -43,7 +44,8 @@ namespace Properties.WebApi.UseCases.V1.Property.CreateOwner
         /// <summary>
         ///     Create a Owner.
         /// </summary>        
-        /// <response code="201">Property was created successfully.</response>
+        /// <response code="200">Owner already exist.</response>
+        /// <response code="201">Owner was created successfully.</response>
         /// <response code="400">Bad request.</response>
         /// <param name="useCase">Use case.</param>
         /// <param name="identificationNumber"></param>
@@ -52,7 +54,7 @@ namespace Properties.WebApi.UseCases.V1.Property.CreateOwner
         /// <param name="photo"></param>
         /// <param name="birthday"></param>        
         /// <returns>The newly registered Owner.</returns>
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CreateOwnerResponse))]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(CreateOwnerResponse))]
@@ -62,8 +64,8 @@ namespace Properties.WebApi.UseCases.V1.Property.CreateOwner
             [FromForm][Required] decimal identificationNumber,
             [FromForm][Required] string name,
             [FromForm][Required] string address,
-            [FromForm]           byte[]? photo,
-            [FromForm]           DateTime? birthday)
+            [FromForm] byte[]? photo,
+            [FromForm] DateTime? birthday)
         {
             useCase.SetOutputPort(this);
 

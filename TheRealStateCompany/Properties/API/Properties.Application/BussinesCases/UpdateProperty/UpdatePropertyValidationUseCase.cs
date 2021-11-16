@@ -32,54 +32,13 @@ namespace Properties.Application.BussinesCases.UpdateProperty
 
         /// <inheritdoc />
         public async Task Execute(
-            Guid propertyGuid, string name, string address, decimal price, decimal tax, string codeInternal, string year, decimal ownerIdentification, string countryStateAbb)
+            Guid propertyGuid, string? name, string? address, decimal? price, decimal? tax, string? codeInternal,
+            string? year, decimal? ownerIdentification, string? countryStateAbb)
         {
             if (propertyGuid == Guid.Empty)
             {
                 this._notification
                     .Add(nameof(propertyGuid), "propertyGuid is required.");
-            }
-
-            if (string.IsNullOrEmpty(name))
-            {
-                this._notification
-                    .Add(nameof(name), "Name is required.");
-            }
-
-            if (string.IsNullOrEmpty(address))
-            {
-                this._notification
-                    .Add(nameof(address), "Address is required.");
-            }
-
-            if (price <= 0)
-            {
-                this._notification
-                    .Add(nameof(price), "Price needs to be greater than zero.");
-            }
-
-            if (string.IsNullOrEmpty(codeInternal))
-            {
-                this._notification
-                    .Add(nameof(codeInternal), "Internal Code is required.");
-            }
-
-            if (string.IsNullOrEmpty(year))
-            {
-                this._notification
-                    .Add(nameof(year), "Year is required.");
-            }
-
-            if (ownerIdentification <= 0)
-            {
-                this._notification
-                    .Add(nameof(ownerIdentification), "Owner identification needs to be greater than zero.");
-            }
-
-            if (string.IsNullOrEmpty(countryStateAbb))
-            {
-                this._notification
-                    .Add(nameof(countryStateAbb), "State Abbreviation is required.");
             }
 
             if (this._notification

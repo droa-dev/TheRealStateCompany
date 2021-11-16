@@ -23,13 +23,6 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer.EntityCon
 
             builder.HasKey(b => b.PropertyGuid);
 
-            builder.Property(b => b.PropertyId)
-                .HasConversion(
-                    v => v.Id,
-                    v => new PropertyId(v))
-                .IsRequired();
-                //.UseIdentityColumn();
-
             builder.Property(b => b.PropertyGuid)
                 .HasConversion(
                     value => value.Id,
@@ -75,6 +68,8 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer.EntityCon
             builder.HasOne(x => x.CountryStates!)
                .WithOne(b => b.Property!)
                .HasForeignKey<Property>(b => b.CountryStatesId);
+
+            builder.Ignore(x => x.CountryStateAbb);
 
             builder.HasMany(x => x.PropertyTraceCollection)
                 .WithOne(b => b.Property!)

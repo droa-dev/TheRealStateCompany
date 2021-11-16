@@ -29,13 +29,6 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer.EntityCon
                     v => new PropertyTraceGuid(v))
                 .IsRequired();
 
-            builder.Property(b => b.PropertyTraceId)
-                .HasConversion(
-                    value => value.Id,
-                    value => new PropertyTraceId(value))
-                .IsRequired();
-                //.UseIdentityColumn();
-
             builder.Property(b => b.DateSale)
                 .IsRequired();
 

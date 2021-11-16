@@ -1,5 +1,6 @@
 ﻿using Properties.Domain.Collections;
 using Properties.Domain.ValueObjects;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Properties.Domain
 {
@@ -7,7 +8,7 @@ namespace Properties.Domain
     {
         public Property(
             PropertyGuid propertyGuid, Name name, Address address, Money price,
-            string codeInternal, string year, OwnerGuid ownerGuid, CountryStatesId countryStatesId) 
+            string codeInternal, string year, OwnerGuid ownerGuid, CountryStatesId countryStatesId)
         {
             this.PropertyGuid = propertyGuid;
             this.Name = name;
@@ -18,18 +19,22 @@ namespace Properties.Domain
             this.OwnerGuid = ownerGuid;
             this.CountryStatesId = countryStatesId;
         }
-        public PropertyId PropertyId { get; }
+        //public PropertyId PropertyId { get; }
         public PropertyGuid PropertyGuid { get; }
         public Name Name { get; }
         public Address Address { get; }
         public Money Price { get; }
         public string CodeInternal { get; set; }
         public string Year { get; set; }
-        public OwnerGuid OwnerGuid { get; set; }
-        public Owner? Owner { get; set; }
+        public OwnerGuid OwnerGuid { get; }
+        //public Owner? Owner { get; set; }
         public CountryStatesId CountryStatesId { get; }
-        public Abbreviation CountryStateAbb { get; }
-        public CountryStates? CountryStates { get; set; }        
+
+        [NotMapped]
+        public Abbreviation CountryStateAbb { get; set; }
+        [NotMapped]
+        public CountryStates? CountryStates { get; set; }
+        [NotMapped]
         public PropertyImage? PropertyImage { get; set; }
         public PropertyTraceCollection? PropertyTraceCollection { get; } = new PropertyTraceCollection();
     }

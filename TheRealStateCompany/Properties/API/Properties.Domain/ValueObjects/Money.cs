@@ -22,6 +22,13 @@ namespace Properties.Domain.ValueObjects
 
         public static bool operator !=(Money left, Money right) => !(left == right);
 
+        public static bool operator >=(Money left, Money right) => !(left >= right);
+
+        public static bool operator <=(Money left, Money right) => !(left <= right);
+
+        public static bool operator >(Money left, Money right) => !(left > right);
+
+        public static bool operator <(Money left, Money right) => !(left < right);
         public bool IsZero() => this.Amount == 0;
 
         public Money Subtract(Money debit) =>

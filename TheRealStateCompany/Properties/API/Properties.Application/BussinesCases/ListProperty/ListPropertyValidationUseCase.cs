@@ -30,8 +30,8 @@ namespace Properties.Application.BussinesCases.ListProperty
 
         /// <inheritdoc />
         public async Task Execute(
-            decimal? ownerIdentification, string countryStateAbb, decimal? initialPrice,
-            decimal? maxPrice, string year, string codeInternal)
+            decimal? ownerIdentification, string? countryStateAbb, decimal? initialPrice,
+            decimal? maxPrice, string? year, string? codeInternal)
         {
             if (initialPrice.HasValue && initialPrice.Value < 0)
             {
