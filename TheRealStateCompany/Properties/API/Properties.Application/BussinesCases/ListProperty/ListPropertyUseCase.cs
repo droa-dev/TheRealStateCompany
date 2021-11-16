@@ -55,7 +55,7 @@ namespace Properties.Application.BussinesCases.ListProperty
 
             if (countryStateAbb.HasValue && !string.IsNullOrEmpty(countryStateAbb.Value.TextAbbreviation))
             {
-                CountryStates state = await this._countryStatesRepository
+                ICountryStates state = await this._countryStatesRepository
                     .GetCountryState(countryStateAbb.Value)
                     .ConfigureAwait(false);
 
@@ -73,7 +73,7 @@ namespace Properties.Application.BussinesCases.ListProperty
             {
                 foreach (Property property in properties)
                 {
-                    CountryStates countryState = await this._countryStatesRepository
+                    ICountryStates countryState = await this._countryStatesRepository
                         .GetCountryState(property.CountryStatesId)
                         .ConfigureAwait(false);
 

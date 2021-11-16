@@ -19,19 +19,19 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer.Repositor
                                                                           throw new ArgumentNullException(
                                                                               nameof(context));
 
-        public async Task<CountryStates> GetCountryState(Abbreviation abbreviation) => await this._context
+        public async Task<ICountryStates> GetCountryState(Abbreviation abbreviation) => await this._context
                 .CountryStates
                 .Where(e => e.Abbrev == abbreviation).Select(e => e)
                 .SingleOrDefaultAsync()
                 .ConfigureAwait(false);
 
-        public async Task<CountryStates> GetCountryState(CountryStatesId countryStatesId) => await this._context
+        public async Task<ICountryStates> GetCountryState(CountryStatesId countryStatesId) => await this._context
                 .CountryStates
                 .Where(e => e.CountryStatesId == countryStatesId).Select(e => e)
                 .SingleOrDefaultAsync()
                 .ConfigureAwait(false);
 
-        public async Task<CountryStates> GetCountryState(Name name) => await this._context
+        public async Task<ICountryStates> GetCountryState(Name name) => await this._context
                 .CountryStates
                 .Where(e => e.Name == name).Select(e => e)
                 .SingleOrDefaultAsync()

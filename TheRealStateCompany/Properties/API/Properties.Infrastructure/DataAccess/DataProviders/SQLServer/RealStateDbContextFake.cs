@@ -38,9 +38,16 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer
                 SeedDataTest.DefaultPropertyId
                 );
 
+            CountryStates states = new CountryStates(
+                SeedDataTest.DefaultCountryStatesId,
+                new Name(SeedDataTest.DefaultCountryStatesName),
+                new Abbreviation(SeedDataTest.DefaultCountryStatesAbbr)
+                );
+
             this.Owners.Add(owner);
             this.Properties.Add(property);
             this.PropertyTraces.Add(trace);
+            this.CountryStates.Add(states);
         }
 
         /// <summary>

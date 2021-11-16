@@ -22,7 +22,7 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer
         //    new byte[]();
 
         public static readonly DateTime DefaultOwnerBirthday =
-            new DateTime().AddYears(-30);
+            DateTime.Now;
         #endregion
 
         #region DefaultProperty
@@ -56,12 +56,19 @@ namespace Properties.Infrastructure.DataAccess.DataProviders.SQLServer
             = new PropertyTraceGuid(new Guid("60B5AE7B-3D05-4719-95B2-F661EFD045D1"));
 
         public static readonly DateTime DefaultPropertyTraceDateSale =
-            new DateTime().AddDays(-1);
-
-
+            DateTime.Now;
         #endregion
 
+        #region DefaultCountryStates
+        public static readonly CountryStatesId DefaultCountryStatesId
+            = new CountryStatesId(12);
 
+        public static readonly string DefaultCountryStatesName
+            = new("Florida");
+
+        public static readonly string DefaultCountryStatesAbbr
+            = new("FL");
+        #endregion
 
     }
 }

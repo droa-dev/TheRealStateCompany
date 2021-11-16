@@ -71,7 +71,7 @@ namespace Properties.Application.BussinesCases.UpdateProperty
 
                 if (countryStateAbb.HasValue && !string.IsNullOrEmpty(countryStateAbb.Value.TextAbbreviation))
                 {
-                    CountryStates state = await this._countryStatesRepository
+                    ICountryStates state = await this._countryStatesRepository
                    .GetCountryState(countryStateAbb.Value)
                    .ConfigureAwait(false);
 

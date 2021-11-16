@@ -50,7 +50,7 @@ namespace Properties.WebApi.UseCases.V1.Property.AddPropertyImage
         /// </summary>        
         /// <response code="201">Iamge was uploaded successfully.</response>
         /// <response code="400">Bad request.</response>
-        /// <response code="404">Not Found.</response>
+        /// <response code="404">Property Not Found.</response>
         /// <param name="useCase">Use case.</param>
         /// <param name="fileName"></param>
         /// <param name="fileByteArray"></param>

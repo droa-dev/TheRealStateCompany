@@ -55,7 +55,7 @@ namespace Properties.Application.BussinesCases.CreateProperty
 
             if (owner is Owner registeredOwner)
             {
-                CountryStates countryStates = await this._countryStatesRepository
+                ICountryStates countryStates = await this._countryStatesRepository
                 .GetCountryState(countryStateAbb);
 
                 if (countryStates is CountryStates registeredState)
